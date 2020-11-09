@@ -1,10 +1,16 @@
-const Person =  {
+const Person = {
     name: 'Johnson',
     prenom: 'Darlon',
     age: '44ans'
 }
 
-const { name, firstName, age } = Person
+const { name, prenom: firstName, age } = Person
 
+const sayHi = (...args) => {
+    if (Person.name) {
+        console.log(`Hello my name is ${name} and my firstName is ${firstName}`)
 
-console.log(`Hello my name is ${name} nd my firstName is ${firstName}`)
+    }
+}
+
+sayHi([name, firstName])
