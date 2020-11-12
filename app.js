@@ -1,46 +1,22 @@
-const Person = {
-    name: 'Johnson',
-    prenom: 'Darlon',
-    age: '44ans',
-
-    familyMembers: [
-        { name: 'Mom', prenom: 'pulcherie', type: 'P' },
-        { name: 'Dad', prenom: 'Alfred', type: 'P' },
-        { name: 'Sis', prenom: 'Michka' },
-        { name: 'wife', prenom: 'Hora' },
-    ],
-
-    sayHi() {
-        console.log(`Hello my name is ${this.name} my father's name is ${this.familyMembers[1].prenom}`)
-    },
-
-    getFamilyMembers() {
-        return this.familyMembers
-    }
-}
-
-const { name, prenom: firstName, age } = Person
+const express = require('express');
+const path = require('path')
 
 
-Person.sayHi()
-const family = Person.getFamilyMembers()
+const app = express();
 
 
-family.forEach(member => {
-    console.log(member.name, member.prenom)
+app.set('view engine', 'ejs');
+app.use(express.static(path.join(__dirname, 'public')));
+
+
+
+const PORT = process.env.PORT || 3000;
+
+
+app.get('/', (req, res) => {
+    res.render('index')
 })
 
-console.log('-----------------------------')
-const countMembers = (...args) => {
-    args.forEach(items => console.log(items.name, items.prenom))
-}
+app.listen(PORT, console.log(`Server running on http://localhost:${PORT}`))
 
-countMembers(...family)
 
-console.log('--------------Mom and Dad------------ ')
-
-family.map(momAndDad => {
-    if (momAndDad.type === 'P') {
-        console.log(momAndDad.prenom)
-    }
-})
